@@ -1,0 +1,9 @@
+SELECT c.UniqueCarrier, c.Description 
+FROM (
+ SELECT f.UniqueCarrier, c.Description, COUNT(FlightNum) x
+ FROM FLIGHT07 f
+ JOIN CARRIER c ON (f.UniqueCarrier = c.Code)
+ GROUP BY f.UniqueCarrier, c.Description
+ ORDER BY x DESC
+ LIMIT 1
+) c;

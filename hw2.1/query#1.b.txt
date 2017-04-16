@@ -1,0 +1,4 @@
+SELECT c.Description, COUNT(f.FlightNum) 
+FROM FLIGHT07 f JOIN CARRIER c
+ON (f.UniqueCarrier =  c.Code)
+GROUP BY c.Description;

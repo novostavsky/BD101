@@ -1,0 +1,3 @@
+SELECT UniqueCarrier, COUNT(*) 
+FROM FLIGHT07 
+GROUP BY UniqueCarrier;

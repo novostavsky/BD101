@@ -1,0 +1,17 @@
+SELECT a, SUM(num) b FROM (
+ SELECT f1.Origin a, COUNT(f1.FlightNum) num
+ FROM FLIGHT07 f1
+ WHERE f1.Month in(6, 7, 8)
+ GROUP BY f1.Origin
+
+ UNION
+
+ SELECT f2.Dest a, COUNT(f2.FlightNum) num
+ FROM FLIGHT07 f2
+ WHERE f2.Month in(6, 7, 8)
+ GROUP BY f2.Dest
+) t
+GROUP BY a
+
+ORDER BY b DESC
+LIMIT 5;

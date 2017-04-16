@@ -1,0 +1,6 @@
+SELECT COUNT(FlightNum)
+FROM FLIGHT07 f 
+JOIN AIRPORT a1 ON (f.Origin =  a1.iata)
+JOIN AIRPORT a2 ON (f.Dest =  a2.iata)
+WHERE f.Month = 6 AND
+(a1.city = 'New York' OR a2.city = 'New York');
