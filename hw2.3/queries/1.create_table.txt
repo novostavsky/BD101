@@ -1,0 +1,51 @@
+DROP TABLE IF EXISTS BIDLOG;
+
+CREATE TABLE BIDLOG (
+ cBidID  string,
+ cTimestamp  string,
+ cLogType int,
+ ciPinYouID  string,
+ cUserAgent  string,
+ cIP  string,
+ cRegionID  string,
+ cCityID int,
+ cAdExchange int,
+ cDomain  string,
+ cURL  string,
+ cAnonymousURL  string,
+ cAdSlotID  string,
+ cAdSlotWidth int,
+ cAdSlotHeight int,
+ cAdSlotVisibility  string,
+ cAdSlotFormat  string,
+ cAdSlotFloorPrice int,
+ cCreativeID  string,
+ cBiddingPrice  string,
+ cPayingPrice  string,
+ cLandingPageURL  string,
+ cAdvertiserID int,
+ cUserProfileIDs  string
+) 
+COMMENT 'Data from bid log files'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+   "separatorChar" = '\t',
+   "escapeChar"    = '\\'
+)  
+STORED AS TEXTFILE;
+
+DROP TABLE IF EXISTS CITY;
+
+CREATE TABLE CITY(
+ cCityID int,
+ cName string
+) 
+COMMENT 'City lookup table from city.en.txt file'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+   "separatorChar" = '\t',
+   "escapeChar"    = '\\'
+)  
+STORED AS TEXTFILE;
+
+

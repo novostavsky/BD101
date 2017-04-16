@@ -1,0 +1,5 @@
+delete jar hdfs:/hw2.3//hw2-1.0-SNAPSHOT.jar;
+
+add jar hdfs:/hw2.3//hw2-1.0-SNAPSHOT.jar;
+
+create temporary function uaparse as 'com.epam.bdcc.bd101.UAgentAnalyzer';

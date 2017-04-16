@@ -1,0 +1,3 @@
+DROP TABLE tmpBrowser;
+DROP TABLE tmpOs;
+DROP TABLE tmpDevice;

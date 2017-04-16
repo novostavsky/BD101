@@ -1,0 +1,47 @@
+DROP TABLE tmp1;
+CREATE TEMPORARY TABLE tmp1
+as
+SELECT b.cCityID, t.browser, t.os, t.device
+FROM BIDLOG b
+lateral view uaparse(cUserAgent) t as browser, os, device;
+
+DROP TABLE tmpBrowser;
+CREATE TABLE tmpBrowser
+as
+SELECT c.cName, t.browser,  count(*) c
+FROM tmp1 t
+JOIN CITY c ON (t.cCityID = c.cCityID)
+GROUP BY c.cName, t.browser;
+
+DROP TABLE tmpOs;
+CREATE TABLE tmpOs
+as
+SELECT c.cName, t.os, count(*) c
+FROM tmp1 t
+JOIN CITY c ON (t.cCityID = c.cCityID)
+GROUP BY c.cName, t.os;
+
+DROP TABLE tmpDevice;
+CREATE TABLE tmpDevice
+as
+SELECT c.cName, t.device, count(*) c
+FROM tmp1 t
+JOIN CITY c ON (t.cCityID = c.cCityID)
+GROUP BY c.cName, t.device;
+
+DROP TABLE tmp1;
+
+select tmpBrowser.cName, tmpBrowser.browser
+from  tmpBrowser
+left semi join (SELECT cName, MAX(c) c FROM tmpBrowser GROUP BY cName) t
+ on (t.c = tmpBrowser.c AND t.cName = tmpBrowser.cName);
+
+select tmpOs.cName, tmpOs.os
+from  tmpOs
+left semi join (SELECT cName, MAX(c) c FROM tmpos GROUP BY cName) t
+ on (t.c = tmpOs.c AND t.cName = tmpOs.cName);
+
+select tmpDevice.cName, tmpDevice.device
+from  tmpDevice
+left semi join (SELECT cName, MAX(c) c FROM tmpDevice GROUP BY cName) t
+ on (t.c = tmpDevice.c AND t.cName = tmpDevice.cName);
