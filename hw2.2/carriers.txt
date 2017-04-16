@@ -1,0 +1,22 @@
+hdfs dfs -put ./carriers.csv /HW2.1/carriers.csv
+hdfs dfs -ls /HW2.1
+ 
+
+DROP TABLE IF EXISTS CARRIER;
+ 
+CREATE TABLE CARRIER (Code string, Description string) 
+COMMENT 'Carriers from  carriers.csv - lookup table'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+   "separatorChar" = ',',
+   "quoteChar"     = '"',
+   "escapeChar"    = '\\'
+)  
+STORED AS TEXTFILE;
+
+LOAD DATA INPATH '/HW2.1/carriers.csv' 
+OVERWRITE INTO TABLE CARRIER;
+
+SELECT * FROM CARRIER LIMIT 5;
+
+http://stackoverflow.com/questions/20813355/skip-first-line-of-csv-while-loading-in-hive-table

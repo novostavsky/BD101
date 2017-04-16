@@ -1,0 +1,1 @@
+there were exactly 1 job for each query, so 3x1 = 3 jobs completed to do the task.

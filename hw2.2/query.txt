@@ -1,0 +1,28 @@
+CREATE TEMPORARY TABLE tmp1
+as
+SELECT f.UniqueCarrier, count(f.FlightNum) cnt
+FROM FLIGHT07 f
+WHERE f.Cancelled = 1
+GROUP BY f.UniqueCarrier
+HAVING count(f.FlightNum) > 1;
+
+
+CREATE TEMPORARY TABLE tmp2
+AS
+SELECT Carrier, collect(City) cty
+FROM (
+SELECT f.UniqueCarrier Carrier, a.City City
+FROM FLIGHT07 f
+JOIN AIRPORT a ON (f.Origin =  a.iata)
+WHERE f.Cancelled = 1
+GROUP BY f.UniqueCarrier, a.City
+) tbl
+GROUP BY Carrier;
+
+ 
+SELECT tmp2.Carrier, tmp1.cnt, tmp2.cty
+FROM  tmp1 LEFT JOIN tmp2 ON tmp1.UniqueCarrier = tmp2.Carrier
+ORDER BY tmp1.cnt DESC;
+
+
+

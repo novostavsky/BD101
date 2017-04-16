@@ -1,0 +1,48 @@
+hdfs dfs -put ./2007.csv /HW2.1/2007.csv
+hdfs dfs -ls /HW2.1
+ 
+
+CREATE TABLE FLIGHT07 (
+      Year int,
+      Month int,
+      DayofMonth int,
+      DayOfWeek int,
+      DepTime int,
+      CRSDepTime int,
+      ArrTime int,
+      CRSArrTime int,
+      UniqueCarrier string,
+      FlightNum string,
+      TailNum string,
+      ActualElapsedTime int,
+      CRSElapsedTime int,
+      AirTime int,
+      ArrDelay int,
+      DepDelay int,
+      Origin string,
+      Dest string,
+      Distance int,
+      TaxiIn int,
+      TaxiOut int,
+      Cancelled string,
+      CancellationCode string,
+      Diverted int,
+      CarrierDelay int,
+      WeatherDelay int,
+      NASDelay int,
+      SecurityDelay int,
+      LateAircraftDelay int)
+COMMENT 'Flights 2007 from 2007.csv - fact table'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+   "separatorChar" = ',',
+   "quoteChar"     = '"',
+   "escapeChar"    = '\\'
+)  
+STORED AS TEXTFILE;
+
+
+LOAD DATA INPATH '/HW2.1/2007.csv' 
+OVERWRITE INTO TABLE FLIGHT07;
+
+SELECT * FROM FLIGHT07 LIMIT 5;

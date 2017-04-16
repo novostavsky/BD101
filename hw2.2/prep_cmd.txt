@@ -1,0 +1,5 @@
+beeline
+!connect jdbc:hive2:// 
+
+add jar hdfs:/HW2.2/brickhouse-0.6.0.jar;
+create temporary function collect as 'brickhouse.udf.collect.CollectUDAF';
