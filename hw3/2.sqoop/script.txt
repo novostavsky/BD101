@@ -1,0 +1,22 @@
+pwd
+unzip better-format.zip
+ls -l
+head part-00000
+
+echo "hadoop" > .password
+chmod o+rw ./.password
+
+
+#simple way
+sqoop export --connect jdbc:mysql://localhost/hw3 --table weather --username root --password hadoop --export-dir hdfs://sandbox.hortonworks.com:8020/hw3.2
+
+#hide credentials and use MySQL Driver
+sqoop export --connect jdbc:mysql://localhost/hw3 --table weather --username root --password-file file:///root/hw3/2.sqoop/.access_creds --driver com.mysql.jdbc.Driver --export-dir hdfs://sandbox.hortonworks.com:8020/hw3.2
+
+#use staging table 
+sqoop export --connect jdbc:mysql://localhost/hw3 --table weather --username root --password-file file:///root/hw3/2.sqoop/.access_creds --staging-table staging --clear-staging-table --driver com.mysql.jdbc.Driver --export-dir hdfs://sandbox.hortonworks.com:8020/hw3.2
+
+#set 2 mappers
+sqoop export --connect jdbc:mysql://localhost/hw3 --table weather --username root --password-file file:///root/hw3/2.sqoop/.access_creds --num-mappers 2 --staging-table staging --clear-staging-table --driver com.mysql.jdbc.Driver --export-dir hdfs://sandbox.hortonworks.com:8020/hw3.2
+
+#NOTE: I do not see why to use more than 2 mappers for this task since It will run in sandbox with 2 cores max

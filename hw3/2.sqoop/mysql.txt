@@ -1,0 +1,11 @@
+create database hw3;
+
+create table hw3.weather (
+stateId VARCHAR(30) NOT NULL,
+date VARCHAR(30) NULL,
+tmin INT(5) NULL,
+tmax INT (5) NULL,
+snow VARCHAR(30) NULL,
+snwd INT(5) NULL,
+prcp INT(5) NULL
+)

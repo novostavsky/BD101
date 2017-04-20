@@ -1,0 +1,6 @@
+cat linux_messages_3000lines.txt | while read line ; do echo "$line" ; sleep 0.2 ; done > output.txt
+
+flume-ng agent --conf /etc/flume/conf --conf-file ./flume.conf --name a1 -Dflume.root.logger=INFO,console
+
+hdfs dfs -ls /hw3.3/out
+hdfs dfs -cat /hw3.3/out/result-.1492454022307

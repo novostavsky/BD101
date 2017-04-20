@@ -1,0 +1,8 @@
+#add few brokers by modification server.properties
+#as described https://community.hortonworks.com/questions/55145/running-multiple-kafka-brokers-on-one-hdp-sandbox.html
+
+
+#set topic Fibonacci
+#replication factor 3
+#partitions 3
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper sandbox.hortonworks.com:2181 --replication-factor 3 --partitions 3 --topic Fibonacci

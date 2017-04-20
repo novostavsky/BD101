@@ -1,0 +1,1 @@
+stateId, date, tmin, tmax, snow, snwd, prcp
