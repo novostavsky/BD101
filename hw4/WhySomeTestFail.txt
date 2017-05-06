@@ -1,0 +1,7 @@
+Some bids have the same price/money for 2+ countries,
+so in calculation I implemented the first max price I get is what I store.
+And the provided test use US country for all such cases.
+
+I beleive that "test datasets" sould not contain duplicates,
+or the task should be changed to add deterministic approach (priority of losa pre countries)
+        e.g.   US>CA>MX, so if you have to choose between US and CA, you choose US always 
